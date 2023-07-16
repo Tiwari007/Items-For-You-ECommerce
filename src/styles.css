@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Lumanosimo&display=swap');
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html{
+  background-color: rgb(26, 24, 24);
+  font-size: 24px;
+}
+
+
+.navigation{
+  height: 80px;
+  background-color: rgb(41, 39, 39);
+  color: rgba(230, 219, 219, 0.932);
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Lumanosimo', cursive;
+}
+
+.home{
+  width: 95%;
+  margin: 20px auto;
+}
+
+.search__box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.search__box input{
+  width: 50%;
+  height: 40px;
+}
+
+.search__box button{
+  width: 10%;
+  height: 40px;
+  margin: 10px 0;
+}
+
+.loading__spinner{
+  display: flex;
+  justify-content: center;
+}
+
+.products{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product__card{
+  width: 30%;
+  height: 400px;
+  padding: 20px;
+  margin: 20px;
+  background-color: cadetblue;
+}

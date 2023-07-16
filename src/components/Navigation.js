@@ -1,7 +1,11 @@
 import { React } from "react";
 
 const Navigation = (props) => {
-  return <h2>Header</h2>;
+  return (
+    <div className="navigation">
+      <h2>Header</h2>
+    </div>
+  );
 };
 
 export default Navigation;

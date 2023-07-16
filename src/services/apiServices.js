@@ -1,32 +1,15 @@
 import axios from "axios";
 
-const getAllProducts = () => {
-  const options = { method: "GET", url: "https://dummyjson.com/products" };
+const getAllProducts = async () => {
+  const data = await axios.get("https://dummyjson.com/products");
 
-  axios
-    .request(options)
-    .then(function (response) {
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
+  return data.data.products;
 };
 
-const getSingleProduct = (id) => {
-  const options = {
-    method: "GET",
-    url: `https://dummyjson.com/products/${id}`,
-  };
+const getSingleProduct = async (id) => {
+  const data = await axios.get(`https://dummyjson.com/products/${id}`);
 
-  axios
-    .request(options)
-    .then(function (response) {
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
+  return data.data;
 };
 
 const addProduct = (data) => {
@@ -81,7 +64,7 @@ const deleteProduct = (id) => {
     });
 };
 
-export default {
+export {
   getAllProducts,
   getSingleProduct,
   addProduct,
