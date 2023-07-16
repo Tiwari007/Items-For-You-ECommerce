@@ -26,9 +26,23 @@ body, html{
 .home{
   width: 95%;
   margin: 20px auto;
+  display: flex;
 }
 
-.search__box{
+.home__menu{
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  color: rgba(255, 255, 255, 0.87);
+} 
+
+.home__content{
+  margin: 20px 0;
+  width: 80%;
+}
+
+.menu__searchBox{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,16 +50,12 @@ body, html{
   padding-top: 10px;
 }
 
-.search__box input{
-  width: 50%;
+.menu__searchBox input{
+  width: 100%;
   height: 40px;
 }
 
-.search__box button{
-  width: 10%;
-  height: 40px;
-  margin: 10px 0;
-}
+
 
 .loading__spinner{
   display: flex;

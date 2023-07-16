@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { getAllProducts } from "../services/apiServices";
-import Loading from "../components/Loading";
 import Product from "../components/Product";
 
-const Products = ({params}) => {
-  const { data, isLoading, error } = useQuery(
-    "getAllProductData",
-    getAllProducts
-  );
-
-  if (isLoading) return <Loading />;
-  if (error) return "An error has occurred: " + error.message;
+const Products = ({params, data}) => {
+ 
 
   const [productsData, setProductsData ] = useState(data)
   const [ pageIndex, setPageIndex ] = useState(1);
+  
 
   useEffect(() => {
     filteringData()
@@ -31,8 +23,6 @@ const Products = ({params}) => {
   const arr = productsData && productsData?.slice(1, Math.ceil(productsData?.length / 9)).map((prdct, i) => {
     return i + 1;
   });
-
-  console.log("arrayData", arr);
 
   return (
     <div>
