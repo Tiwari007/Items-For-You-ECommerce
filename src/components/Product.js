@@ -12,6 +12,7 @@ export default function Product({data}) {
   return (
     <Card sx={{ maxWidth: 315, margin: "20px 20px", padding: "10px" }}>
       <CardMedia
+      className='product_image'
         sx={{ height: 200 }}
         image={data?.thumbnail}
         title="green iguana"
@@ -20,15 +21,15 @@ export default function Product({data}) {
         <Typography className='product__title'>
           {data?.title} ({data?.brand})
         </Typography>
-        <Typography color="text.secondary">
+        <Typography className='product__description' color="text.secondary">
           {data?.description}
         </Typography>
-        <Chip label={data?.category} color="primary" variant="outlined" />
-        <Typography color="text.primary">
+        <Chip className='product__tags' label={data?.category} color="primary" variant="outlined" />
+        <Typography className='product__price' color="text.primary">
           ${data?.price}.00
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions className='product__buttons'>
         <Button variant="outlined">Add To Cart</Button>
         <Button variant="outlined">Buy Now</Button>
       </CardActions>

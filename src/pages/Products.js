@@ -43,9 +43,10 @@ const Products = ({params, data}) => {
         >
           ⏮ Prev
         </button>
-        {arr.map((val) => {
+        {arr.map((val, index) => {
           return (
             <button
+            key={index}
               style={{ padding: "20px", marginRight: "10px" }}
               onClick={() => setPageIndex(val)}
             >

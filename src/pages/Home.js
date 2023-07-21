@@ -18,7 +18,7 @@ const minDistance = 1;
 const Home = () => {
 
   const [searchParams, setSearchParams] = useState("")
-  const [value1, setValue1] = useState([20, 37]);
+  const [value1, setValue1] = useState([0, 100]);
   const [category, setCategory] = useState('All');
 
 
@@ -31,19 +31,23 @@ const Home = () => {
   if (isLoading) return <Loading />;
   if (error) return "An error has occurred: " + error.message;
 
+
+ 
+
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
 
-  const myDebounce = (cb, time) => {
-    let timer;
-    return function (...args) {
-      if (timer) {
-        clearTimeout(timer)
-      }
-      timer = setTimeout(cb(...args), time)
-    }
-  };
+
+  // const myDebounce = (cb, time) => {
+  //   let timer;
+  //   return function (...args) {
+  //     if (timer) {
+  //       clearTimeout(timer)
+  //     }
+  //     timer = setTimeout(cb(...args), time)
+  //   }
+  // };
 
   const handleChange1 = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
@@ -55,6 +59,8 @@ const Home = () => {
     } else {
       setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
     }
+
+    console.log("value", value1);
   };
 
 
@@ -64,33 +70,35 @@ const Home = () => {
   return (
     <div className='home'>
       <div className='home__menu'>
-        <h2>Filter By</h2>
-
         {/* name */}
-        <span>Name</span>
+        
         <div className='menu__searchBox'>
-          <input type='text' value={searchParams} onChange={(e) => myDebounce(setSearchParams(e.target.value), 1000)} placeholder='Type Item to Search' />
+        <span>Name</span>
+          <input type='text' value={searchParams} onChange={(e) => setSearchParams(e.target.value)} placeholder='Type Item to Search' />
         </div>
 
 
         {/* price */}
-        <span>Price</span>
+        
         <div className='menu__slider'>
+        <span>Price</span>
           <Slider
+          className='slider'
             getAriaLabel={() => 'Minimum distance'}
             value={value1}
             onChange={handleChange1}
             valueLabelDisplay="auto"
             getAriaValueText={valuetext}
-            disableSwap
+            // disableSwap
           />
         </div>
 
         {/* category */}
         {/* <span>Category</span> */}
-        <div className='menu__dropdown primary'>
-          <InputLabel id="demo-simple-select-filled-label">Category</InputLabel>
+        <div className='menu__dropdown'>
+          <InputLabel className='dropdown__input' id="demo-simple-select-filled-label">Category</InputLabel>
           <Select
+          className='slider__select'
             labelId="demo-simple-select-filled-label"
             id="demo-select-small"
             value={category}
@@ -100,7 +108,7 @@ const Home = () => {
             {
               categoryArray?.map((singleCategory, index) => {
                 return (
-                  <MenuItem value={singleCategory || ""}>{singleCategory || "All"}</MenuItem>
+                  <MenuItem key={index} value={singleCategory || ""}>{singleCategory || "All"}</MenuItem>
                 )
               })
             }
@@ -110,8 +118,6 @@ const Home = () => {
       <div className='home__content'>
         <Products params={searchParams} data={data} />
       </div>
-
-
     </div>
   );
 }
