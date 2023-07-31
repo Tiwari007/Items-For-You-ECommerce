@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Product from "../components/Product";
 
-const Products = ({params, data, category}) => {
+const Products = ({params, data, category, value1Slider}) => {
  
 
   const [productsData, setProductsData ] = useState(data)
@@ -16,6 +16,9 @@ const Products = ({params, data, category}) => {
     filteringDataByCategory()
   }, [category])
 
+  useEffect(() => {
+    filteringDataBySlider()
+  }, [value1Slider])
 
 
   
@@ -33,6 +36,11 @@ const Products = ({params, data, category}) => {
       let filteredData = data && data?.filter(product => product?.category === category)
       setProductsData(filteredData)
     }
+  }
+
+  function filteringDataBySlider(){
+      let filteredData = data && data?.filter(product => product?.price >= value1Slider[0] && product?.price <= value1Slider[1] )
+      setProductsData(filteredData)
   }
 
 

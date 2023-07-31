@@ -12,18 +12,16 @@ import Select from '@mui/material/Select';
 function valuetext(value) {
   return `${value}`;
 }
-const minDistance = 1;
+const minDistance = 10;
 
 
 const Home = () => {
 
   const [searchParams, setSearchParams] = useState("")
-  const [value1, setValue1] = useState([0, 100]);
+  const [value1, setValue1] = useState([0,2000]);
   const [category, setCategory] = useState('All');
 
   
-
-
 
   const { data, isLoading, error } = useQuery(
     "getAllProductData",
@@ -38,8 +36,12 @@ const Home = () => {
     ele.price > maxPrice ? maxPrice = ele.price : null
   })
 
+ 
+
 
   console.log("maxPrice: ", maxPrice);
+
+
  
 
   const handleChange = (event) => {
@@ -97,6 +99,8 @@ const Home = () => {
             onChange={handleChange1}
             valueLabelDisplay="auto"
             getAriaValueText={valuetext}
+            min={0}
+            max={maxPrice}
             // disableSwap
           />
         </div>
@@ -125,7 +129,7 @@ const Home = () => {
         </div>
       </div>
       <div className='home__content'>
-        <Products params={searchParams} data={data} category={category} />
+        <Products params={searchParams} data={data} category={category} value1Slider={value1} />
       </div>
     </div>
   );
