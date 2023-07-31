@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Product from "../components/Product";
 
-const Products = ({params, data}) => {
+const Products = ({params, data, category}) => {
  
 
   const [productsData, setProductsData ] = useState(data)
@@ -9,15 +9,31 @@ const Products = ({params, data}) => {
   
 
   useEffect(() => {
-    filteringData()
+    filteringDataByParams()
   }, [params])
 
+  useEffect(() => {
+    filteringDataByCategory()
+  }, [category])
+
+
+
   
-  function filteringData(){
+  function filteringDataByParams(){
     let filteredData = data && data?.filter(product => product?.title?.toLowerCase().includes(params?.toLowerCase()))
     setProductsData(filteredData)
   }
   
+
+  function filteringDataByCategory(){
+    if(category == "All"){
+      setProductsData(data)
+    } 
+    else{
+      let filteredData = data && data?.filter(product => product?.category === category)
+      setProductsData(filteredData)
+    }
+  }
 
 
   const arr = productsData && productsData?.slice(1, Math.ceil(productsData?.length / 9)).map((prdct, i) => {

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useQuery } from "react-query";
 import { getAllProducts } from "../services/apiServices";
 import Slider from '@mui/material/Slider';
@@ -21,6 +21,8 @@ const Home = () => {
   const [value1, setValue1] = useState([0, 100]);
   const [category, setCategory] = useState('All');
 
+  
+
 
 
   const { data, isLoading, error } = useQuery(
@@ -31,7 +33,13 @@ const Home = () => {
   if (isLoading) return <Loading />;
   if (error) return "An error has occurred: " + error.message;
 
+  let maxPrice  = 0
+  data.map(ele => {
+    ele.price > maxPrice ? maxPrice = ele.price : null
+  })
 
+
+  console.log("maxPrice: ", maxPrice);
  
 
   const handleChange = (event) => {
@@ -65,7 +73,7 @@ const Home = () => {
 
 
   let categoryArray = [...new Set(data?.map(ele => ele.category))]
-  console.log("categoryArray", categoryArray)
+  // console.log("categoryArray", categoryArray)
 
   return (
     <div className='home'>
@@ -105,10 +113,11 @@ const Home = () => {
             label="Category"
             onChange={handleChange}
           >
+            <MenuItem value="All">All</MenuItem>
             {
               categoryArray?.map((singleCategory, index) => {
                 return (
-                  <MenuItem key={index} value={singleCategory || ""}>{singleCategory || "All"}</MenuItem>
+                  <MenuItem key={index} value={singleCategory}>{singleCategory}</MenuItem>
                 )
               })
             }
@@ -116,7 +125,7 @@ const Home = () => {
         </div>
       </div>
       <div className='home__content'>
-        <Products params={searchParams} data={data} />
+        <Products params={searchParams} data={data} category={category} />
       </div>
     </div>
   );
